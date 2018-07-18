@@ -10,6 +10,6 @@ for the [Petition to Rescind Article 50 if Vote Leave Broke the Law](https://pet
 
 You can also play with a live notebook:
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/augeas/UK-parliament-petition-scraper/master?filepath=rescind_art_50.ipynb)
-Copy markdown link to clipboard
+
 
 ![signatures chart](https://raw.githubusercontent.com/augeas/UK-parliament-petition-scraper/master/rescind_art_50.png)
