@@ -8,4 +8,8 @@ If one has ever wondered about the dynamics of online petition signing, the
 [Here's an example](https://github.com/augeas/UK-parliament-petition-scraper/blob/master/rescind_art_50.ipynb)
 for the [Petition to Rescind Article 50 if Vote Leave Broke the Law](https://petition.parliament.uk/petitions/223729).
 
+You can also play with a live notebook:
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/augeas/UK-parliament-petition-scraper/master?filepath=rescind_art_50.ipynb)
+Copy markdown link to clipboard
+
 ![signatures chart](https://raw.githubusercontent.com/augeas/UK-parliament-petition-scraper/master/rescind_art_50.png)
