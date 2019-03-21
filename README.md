@@ -9,7 +9,6 @@ If one has ever wondered about the dynamics of online petition signing, the
 for the [Petition to Revoke Article 50](https://petition.parliament.uk/petitions/241584).
 
 You can also play with a live notebook:
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/augeas/UK-parliament-petition-scraper/master?filepath=revoke_art_50.ipynb)
-
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/augeas/UK-parliament-petition-scraper/master?filepath=revoke_article_50.ipynb)
 
 ![signatures chart](https://raw.githubusercontent.com/augeas/UK-parliament-petition-scraper/master/revoke_art_50.png)
