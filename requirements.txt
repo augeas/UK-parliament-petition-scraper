@@ -2,3 +2,4 @@ bs4
 ipywidgets
 matplotlib
 requests
+scipy
