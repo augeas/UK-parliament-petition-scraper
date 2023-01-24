@@ -12,6 +12,7 @@ For example for the petition to
 scrapy crawl petition -a petition=300976 -o anti_conversion.csv
 ```
 
+Substitute the ID from the URL of the petition of your choice.
 (Run in the same directory as `scrapy.cfg`, having installed scrapy with `pip3 install scrapy`.)
 
 Then:
@@ -32,6 +33,8 @@ plt.ylabel('signatures')
 plt.title('''Signatures for the UK parliament "Ban LGBT Conversion 'Therapy'" Petition''')
 plt.show()
 ```
+
+![Signatures for the UK parliament "Ban LGBT Conversion 'Therapy'" Petition](https://github.com/augeas/UK-parliament-petition-scraper/blob/master/anti_conversion.png)
 
 This may one day may be used to demonstrate the merits of [scrapy](https://scrapy.org/) (a *scraping*
 framework) for *scraping things* over
