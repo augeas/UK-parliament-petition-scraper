@@ -74,3 +74,6 @@ def render_template():
     with open('index.html', 'w') as index:
         index.write(template.render(updated=datetime.now().ctime()))
     
+if __name__ == '__main__':
+    petition_chart()
+    render_template()
