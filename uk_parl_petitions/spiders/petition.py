@@ -2,6 +2,7 @@
 from datetime import datetime
 from itertools import starmap
 
+from dateutil import parser
 import scrapy
 
 PETITION_URL = 'petition.parliament.uk/petitions/{}'
@@ -11,11 +12,17 @@ class PetitionSpider(scrapy.Spider):
     name = 'petition'
 
     # e.g: scrapy crawl petition -a petition=300976 -o anti_conversion.csv
-    def __init__(self, petition=None):
+    def __init__(self, petition=None, last_crawled=None):
         if petition:
             self.petition_url = PETITION_URL.format(petition)
         else:
             self.petition_url = None
+            
+        if last_crawled:
+            self.last_crawled = parser.parse(last_crawled)
+        else:
+            self.last_crawled = datetime.fromtimestamp(0)
+            
 
     def parse(self):
         pass
@@ -42,7 +49,8 @@ class PetitionSpider(scrapy.Spider):
         timestamps = (datetime(*map(int, map(snap.__getitem__, slices)))
             for snap in snapshots)
         
-        for snap, ts in zip(snapshots, timestamps):
+        for snap, ts in filter(
+            lambda t: t[1] > self.last_crawled, zip(snapshots, timestamps)):
             yield scrapy.http.Request(SNAPSHOT_URL.format(snap, self.petition_url),
                 meta={'timestamp': ts}, callback=self.parse_signatures)
             
