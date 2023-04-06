@@ -51,21 +51,17 @@ def petition_rows(fname, petition_id):
 
 def petition_chart(crawl=True):
     if crawl:
-        scum_df = petition_rows('gc_scum.csv', 630932)
-        anti_scum_df = petition_rows('anti_gc_scum.csv', 631529)
+        petition_df = petition_rows('equality_act.csv', 627984)
     else:
-        scum_df = read_petition_csv('gc_scum.csv')
-        anti_scum_df = read_petition_csv('anti_gc_scum.csv')        
+        petition_df =  read_petition_csv('equality_act.csv')
     
     plt.figure()
     plt.xticks(rotation=30, ha='right')
-    plt.plot(scum_df['timestamp'], scum_df['count'], label='anti-LGBT')
-    plt.plot(anti_scum_df['timestamp'], anti_scum_df['count'], label='pro-LGBT')
+    plt.plot(petition_df['timestamp'], petition_df['count'])
     plt.xlabel('date')
     plt.ylabel('signatures')
-    plt.title('''Signatures for the UK Parliament "anti" and "pro" LGBT Education Petitions''')
-    plt.legend()
-    plt.savefig('lgbt_petitions.png', bbox_inches='tight', pad_inches=0.3)
+    plt.title('''Signatures for the UK Parliament Petition to not amend the Equality Act's definition of sex''')
+    plt.savefig('lgbt_petition.png', bbox_inches='tight', pad_inches=0.3)
     
 def render_template():
     loader = jinja2.FileSystemLoader(searchpath="./")
