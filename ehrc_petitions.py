@@ -1,3 +1,4 @@
+
 from datetime import datetime
 from multiprocessing import Process
 import os
@@ -50,26 +51,26 @@ def petition_rows(fname, petition_id):
 
 def petition_chart(crawl=True):
     if crawl:
-        scum_df = petition_rows('gc_scum.csv', 630932)
-        anti_scum_df = petition_rows('anti_gc_scum.csv', 631529)
+        tra_df = petition_rows('tra_ehrc.csv', 627984)
+        gc_df = petition_rows('gc_ehrc.csv', 623243)
     else:
-        scum_df = read_petition_csv('gc_scum.csv')
-        anti_scum_df = read_petition_csv('anti_gc_scum.csv')        
+        tra_df =  read_petition_csv('tra_ehrc.csv')
+        gc_df =  read_petition_csv('gc_ehrc.csv')
     
     plt.figure()
     plt.xticks(rotation=30, ha='right')
-    plt.plot(scum_df['timestamp'], scum_df['count'], label='anti-LGBT')
-    plt.plot(anti_scum_df['timestamp'], anti_scum_df['count'], label='pro-LGBT')
+    plt.plot(tra_df['timestamp'], tra_df['count'], label='pro trans')
+    plt.plot(gc_df['timestamp'], gc_df['count'], label='anti trans')
     plt.xlabel('date')
     plt.ylabel('signatures')
-    plt.title('''Signatures for the UK Parliament "anti" and "pro" LGBT Education Petitions''')
+    plt.title('''Signatures for the UK Parliament Petitions regarding the Equality Act's definition of sex''')
     plt.legend()
-    plt.savefig('lgbt_petitions.png', bbox_inches='tight', pad_inches=0.3)
+    plt.savefig('ehrc_petitions.png', bbox_inches='tight', pad_inches=0.3)
     
 def render_template():
     loader = jinja2.FileSystemLoader(searchpath="./")
     env = jinja2.Environment(loader=loader)
-    template = env.get_template('petition_template.html')
+    template = env.get_template('ehrc_template.html')
     with open('index.html', 'w') as index:
         index.write(template.render(updated=datetime.now().ctime()))
     

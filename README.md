@@ -41,7 +41,7 @@ framework) for *scraping things* over
 [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/), a perfectly fine HTML
 parser.
 
-Unfortunately, scraping winth Beautiful Soup, does rather tend to make for rather pithy Medium articles
+Unfortunately, scraping with Beautiful Soup, does rather tend to make for rather pithy Medium articles
 and, err.. ...[letters to Nature](https://www.nature.com/articles/d41586-020-02558-0).
 
 
