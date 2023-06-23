@@ -51,16 +51,16 @@ def petition_rows(fname, petition_id):
 
 def petition_chart(crawl=True):
     if crawl:
-        petition_df = petition_rows('equality_act.csv', 627984)
+        petition_df = petition_rows('section_28_ii.csv', 636802)
     else:
-        petition_df =  read_petition_csv('equality_act.csv')
+        petition_df =  read_petition_csv('section_28_ii.csv')
     
     plt.figure()
     plt.xticks(rotation=30, ha='right')
     plt.plot(petition_df['timestamp'], petition_df['count'])
     plt.xlabel('date')
     plt.ylabel('signatures')
-    plt.title('''Signatures for the UK Parliament Petition to not amend the Equality Act's definition of sex''')
+    plt.title('''Signatures for the UK Parliament Petition to\nnot require schools to tell parents their child is transgender/non-binary''')
     plt.savefig('lgbt_petition.png', bbox_inches='tight', pad_inches=0.3)
     
 def render_template():
