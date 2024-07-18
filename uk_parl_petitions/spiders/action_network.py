@@ -11,9 +11,9 @@ SNAPSHOT_URL = 'https://web.archive.org/web/{}/{}'
 
 class ActionNetworkSpider(PetitionSpider):
 
-    name = 'action_netork'
+    name = 'action_network'
 
-    # e.g: scrapy crawl action_netork -a petition=open-letter-to-the-health-secretary -o streeting_fail.csv
+    # e.g: scrapy crawl action_newtork -a petition=open-letter-to-the-health-secretary -o streeting_fail.csv
     def __init__(self, petition=None, last_crawled=None):
         if petition:
             self.petition_url = PETITION_URL.format(petition)
