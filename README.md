@@ -36,6 +36,12 @@ plt.show()
 
 ![Signatures for the UK parliament "Ban LGBT Conversion 'Therapy'" Petition](https://github.com/augeas/UK-parliament-petition-scraper/blob/master/anti_conversion.png)
 
+There's also a spider for the "Action Network", for example, the "[Open Letter to the Health Secretary](https://actionnetwork.org/petitions/open-letter-to-the-health-secretary)" with regard to continuing the [ban on puberty blockers](https://trans-express.lgbt/post/756244126854512641/there-is-a-pro-transgender-labour-revolt-against) from the outgoing Conservative Government.
+
+```bash
+scrapy crawl action_netork -a petition=open-letter-to-the-health-secretary -o streeting_fail.csv
+```
+
 This may one day may be used to demonstrate the merits of [scrapy](https://scrapy.org/) (a *scraping*
 framework) for *scraping things* over
 [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/), a perfectly fine HTML
