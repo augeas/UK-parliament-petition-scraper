@@ -42,6 +42,14 @@ There's also a spider for the "Action Network", for example, the "[Open Letter t
 scrapy crawl action_network -a petition=open-letter-to-the-health-secretary -o streeting_fail.csv
 ```
 
+Or, there's the [petition to reverse the suspension of 7 Labour MPs](https://actionnetwork.org/petitions/keir-starmer-reverse-the-7-mps-suspension/)
+with regard to the [child benefit cap](https://www.aljazeera.com/news/2024/7/24/what-is-the-uks-two-child-cap-on-benefits-and-will-labour-reverse-it).
+
+```bash
+scrapy crawl action_network -a petition=keir-starmer-reverse-the-7-mps-suspension -o starmer_fail.csv
+```
+
+
 This may one day may be used to demonstrate the merits of [scrapy](https://scrapy.org/) (a *scraping*
 framework) for *scraping things* over
 [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/), a perfectly fine HTML
