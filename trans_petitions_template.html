@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>UK Parliament Petitions on Trans Issues</title>
+        
+        <style>
+            .grid-container-element { 
+                display: grid; 
+                grid-template-columns: 1fr 1fr; 
+                grid-gap: 20px; 
+                width: 95%; 
+            } 
+            .grid-child-element { 
+                margin: 10px; 
+                font-size: 20px;
+            }
+        </style>
+        
+    </head>
+
+    <body>
+        <div class="grid-container-element">
+            <div class="grid-child-element">
+                <p>
+                Following the <a href="https://transactual.org.uk/blog/2025/04/16/response-by-transactual-to-supreme-court-ruling-on-equality-act/">
+                Supreme Court's ruling on the Equality Act</A>, it is little wonder that Parliamentary Petitions on trans issues have seen rapid increases
+                in signatures. The petitions run for 6 months, 100K signatures are required for a debate in Parliament, for whatever utility that may provide.
+                Having signed them, consider <a href="https://www.writetothem.com/">writing to your MP</a>, as per the advice given by
+                <a href="https://www.translegalproject.org/post/urgent-action-write-to-your-mp-to-protest-the-supreme-court-ruling-and-the-ehrc-s-proposals-to-impo">
+                TheTransLegalProject</a>. See also <a href="https://transsafety.network/">The Trans Safety Network</a>.
+                </p>
+            
+                {% for link in petitions %}
+                    <p><a href="{{link[0]}}">{{link[1]}}</a></p>
+                {% endfor %}
+                <a href="https://www.translegalproject.org/post/urgent-action-write-to-your-mp-to-protest-the-supreme-court-ruling-and-the-ehrc-s-proposals-to-impo">
+                <h3>Write to your MP.</h3></a>
+            </div>
+            <div  class="grid-child-element">
+                <p><img src="all_open_trans_petitions.png"/></p>
+                <p><a href="open_trans_petitions.csv">(Download the data.)<a></p>
+            
+            </div>
+        </div>
+        
+    <body>
+    
+</html>

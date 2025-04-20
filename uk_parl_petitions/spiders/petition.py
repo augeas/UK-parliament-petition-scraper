@@ -62,7 +62,11 @@ class PetitionSpider(scrapy.Spider):
             'timestamp': response.meta.get(
                 'timestamp', datetime.now()).isoformat().split('.')[0],
             'count': int(response.css('span.count').xpath(
-                '@data-count').extract_first())
+                '@data-count').extract_first()),
+            'title': response.css('h1>span.heading-secondary').xpath(
+                'following-sibling::text()').extract_first().strip(),
+            'deadline': parser.parse(''.join(response.css('li.meta-deadline').xpath(
+                'child::text()').extract())).isoformat()
         }
             
 
