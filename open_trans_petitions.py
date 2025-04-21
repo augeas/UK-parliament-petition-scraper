@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     plt.xticks(rotation=30, ha='right')
     for df in sorted(petition_dfs.values(), key=lambda df: df['count'].max(), reverse=True):
-        plt.plot(df['timestamp'], df['count'], marker='o', label=df.title.loc[0])
+        plt.plot(df['timestamp'], df['count'], marker='o', label=df.title.iloc[0])
     plt.xlabel('date')
     plt.ylabel('signatures')
     plt.title('Open Parliamentary Petitions on Trans Issues')
@@ -62,9 +62,9 @@ if __name__ == '__main__':
 
     pd.concat(list(petition_dfs.values())).to_csv('open_trans_petitions.csv')
 
-    titles = {k: df.title.loc[0] for k, df in petition_dfs.items()}
+    titles = {k: df.title.iloc[0] for k, df in petition_dfs.items()}
     by_deadline = sorted(
-        [(k, petition_dfs[k].deadline.loc[0]) for k in PETITIONS.keys()],
+        [(k, petition_dfs[k].deadline.iloc[0]) for k in PETITIONS.keys()],
     key=lambda p: p[1])
     links = [
         (PETITION_URL.format(PETITIONS[p]), '{} ({})'.format(titles[p], ts.date().isoformat()))
