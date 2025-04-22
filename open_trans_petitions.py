@@ -29,7 +29,9 @@ PETITIONS = {
     'nhs_hormones': 704447,
     'gc_equality': 712741,
     'funding': 705870,
-    'non_binary': 700312
+    'non_binary': 700312,
+    'blockers': 702538,
+    'athletes': 700219
 }
 
 PETITION_URL = 'https://petition.parliament.uk/petitions/{}'
