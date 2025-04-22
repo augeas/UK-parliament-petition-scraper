@@ -32,7 +32,9 @@ PETITIONS = {
     'funding': 705870,
     'non_binary': 700312,
     'blockers': 702538,
-    'athletes': 700219
+    'athletes': 700219,
+    'schools': 700221,
+    'therapy': 700652
 }
 
 PETITION_URL = 'https://petition.parliament.uk/petitions/{}'
@@ -60,7 +62,7 @@ if __name__ == '__main__':
     plt.xlabel('date')
     plt.ylabel('signatures')
     plt.title('Open Parliamentary Petitions on Trans Issues')
-    plt.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.85))
+    plt.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.95))
     plt.savefig('all_open_trans_petitions.png', bbox_inches='tight')
 
     pd.concat(list(petition_dfs.values())).to_csv('open_trans_petitions.csv')
