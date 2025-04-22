@@ -1,4 +1,5 @@
 
+from datetime import datetime
 import os
 import json
 import subprocess as sp
@@ -65,7 +66,7 @@ if __name__ == '__main__':
     plt.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.95))
     plt.savefig('all_open_trans_petitions.png', bbox_inches='tight')
 
-    pd.concat(list(petition_dfs.values())).to_csv('open_trans_petitions.csv')
+    pd.concat(list(petition_dfs.values())).to_csv('open_trans_petitions.csv', index=False)
 
     titles = {k: df.title.iloc[0] for k, df in petition_dfs.items()}
     by_deadline = sorted(
@@ -80,8 +81,9 @@ if __name__ == '__main__':
         }
     for p, ts in by_deadline]
     id_dump = 'var petition_ids={};'.format(json.dumps(list(PETITIONS.values())))
+    updated, _ = datetime.now().isoformat().split('.')
     loader = jinja2.FileSystemLoader(searchpath="./")
     env = jinja2.Environment(loader=loader)
     template = env.get_template('trans_petitions_template.html')
     with open('index.html', 'w') as index:
-        index.write(template.render(petitions=links, id_dump=id_dump))
+        index.write(template.render(petitions=links, id_dump=id_dump, updated=updated))
