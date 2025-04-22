@@ -1,5 +1,6 @@
 
 import os
+import json
 import subprocess as sp
 
 import jinja2
@@ -69,11 +70,16 @@ if __name__ == '__main__':
         [(k, petition_dfs[k].deadline.iloc[0]) for k in PETITIONS.keys()],
     key=lambda p: p[1])
     links = [
-        (PETITION_URL.format(PETITIONS[p]), '{} ({})'.format(titles[p], ts.date().isoformat()))
+        {
+            'url': PETITION_URL.format(PETITIONS[p]),
+            'title': titles[p],
+            'expires': ts.date().isoformat(),
+            'id': PETITIONS[p]
+        }
     for p, ts in by_deadline]
-
+    id_dump = 'var petition_ids={};'.format(json.dumps(list(PETITIONS.values())))
     loader = jinja2.FileSystemLoader(searchpath="./")
     env = jinja2.Environment(loader=loader)
     template = env.get_template('trans_petitions_template.html')
     with open('index.html', 'w') as index:
-        index.write(template.render(petitions=links))
+        index.write(template.render(petitions=links, id_dump=id_dump))

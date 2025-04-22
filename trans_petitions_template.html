@@ -3,34 +3,61 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">  
         <title>UK Parliament Petitions on Trans Issues</title>
+        <script>
+            {{id_dump}}
+        </script>
+        <script
+			  src="https://code.jquery.com/jquery-3.7.1.min.js"
+			  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+			  crossorigin="anonymous">
+        </script>
+        <script>
+            function set_sigs(data, status, req) {
+              $('#'+data.data.id).html('<b>'+data.data.attributes.signature_count+'</b>');
+            }
+            
+            function get_sigs(id) {
+                $.ajax(
+                "https://petition.parliament.uk/petitions/"+id+".json",
+                {"success": set_sigs}
+                );
+            }
+            
+            $(function() {
+                petition_ids.map(get_sigs);
+            });
+        </script>
         <style>
-            @media only screen and (min-device-width: 600px) {
+            @media only screen and (min-device-width: 800px) {
                 .container { 
                     display: flex;
                     flex-direction: row;
                 } 
-                .child { 
+                .child {
+                    width: 50%;
                     margin: 10px; 
                     font-size: 20px;
+                    flex-basis: 50%;
                 }
             }
 
-            @media only screen and (max-device-width: 600px) {
+            @media only screen and (max-device-width: 800px) {
                 .container { 
                     display: flex; 
                     flex-direction: column-reverse;
                 } 
                 .child {
+                    width: 100%;
                     margin: 10px; 
                     font-size: 20px;
                 }            
-            }
+            }        
         </style>
     </head>
     
     <body>
-        <div class="grid-container-element">
-            <div class="grid-child-element">
+        <div class="container">
+            <div class="child">
                 <p>
                 Following the <a href="https://transactual.org.uk/blog/2025/04/16/response-by-transactual-to-supreme-court-ruling-on-equality-act/">
                 Supreme Court's ruling on the Equality Act</A>, it is little wonder that Parliamentary Petitions on trans issues have seen rapid increases
@@ -42,14 +69,18 @@
                 </p>
             
                 {% for link in petitions %}
-                    <p><a href="{{link[0]}}">{{link[1]}}</a></p>
+                    <p>
+                        <a href={{link['url']}}}>{{link['title']}}}</a>
+                        <span>({{link['expires']}})</span>
+                        <span id="{{link['id']}}"></span>
+                    </p>
                 {% endfor %}
                 <a href="https://www.translegalproject.org/post/urgent-action-write-to-your-mp-to-protest-the-supreme-court-ruling-and-the-ehrc-s-proposals-to-impo">
                 <h3>Write to your MP.</h3></a>
             </div>
             <div  class="grid-child-element">
                 <p><img src="all_open_trans_petitions.png"/></p>
-                <p><a href="open_trans_petitions.csv">(Download the data.)<a></p>
+                <p><a href="open_trans_petitions.csv">(Download the data)<a></p>
             
             </div>
         </div>
