@@ -59,7 +59,7 @@ if __name__ == '__main__':
     plt.xlabel('date')
     plt.ylabel('signatures')
     plt.title('Open Parliamentary Petitions on Trans Issues')
-    plt.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.75))
+    plt.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.85))
     plt.savefig('all_open_trans_petitions.png', bbox_inches='tight')
 
     pd.concat(list(petition_dfs.values())).to_csv('open_trans_petitions.csv')
