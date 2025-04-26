@@ -4,8 +4,12 @@ import os
 import json
 import subprocess as sp
 
+from bokeh.embed import components
+from bokeh.models import Legend
+from bokeh.palettes import Category20
+from bokeh.plotting import figure
+from bokeh.resources import CDN
 import jinja2
-from matplotlib import pyplot as plt
 import pandas as pd
 
 def crawl_petition(pid, last_crawled=None):
@@ -40,13 +44,15 @@ PETITIONS = {
 
 PETITION_URL = 'https://petition.parliament.uk/petitions/{}'
 
-def get_and_save_petition(name):
+def get_and_save_petition(name, new=True):
     fname = name + '.csv'
     try:
         existing_df = pd.read_csv(fname)
         existing_df['timestamp'] = pd.to_datetime(existing_df.timestamp)
         existing_df['deadline'] = pd.to_datetime(existing_df.deadline)
         last_crawled = existing_df.timestamp.max().isoformat()
+        if not new:
+            return existing_df
     except:
         existing_df = pd.DataFrame()
         last_crawled = None
@@ -57,14 +63,21 @@ def get_and_save_petition(name):
 if __name__ == '__main__':    
     petition_dfs = {k: get_and_save_petition(k) for k in PETITIONS.keys()}
 
-    plt.xticks(rotation=30, ha='right')
-    for df in sorted(petition_dfs.values(), key=lambda df: df['count'].max(), reverse=True):
-        plt.plot(df['timestamp'], df['count'], marker='o', label=df.title.iloc[0])
-    plt.xlabel('date')
-    plt.ylabel('signatures')
-    plt.title('Open Parliamentary Petitions on Trans Issues')
-    plt.legend(loc='lower left', bbox_to_anchor=(-0.1, -0.95))
-    plt.savefig('all_open_trans_petitions.png', bbox_inches='tight')
+    fig = figure(width=600, height=700, x_axis_type="datetime")
+    fig.title.text = 'Open Parliamentary Petitions on Trans Issues'
+    fig.xaxis.axis_label = 'date'
+    fig.yaxis.axis_label = 'signatures (thousands)'
+    fig.add_layout(Legend(), 'below')
+    
+    for df, colour in zip( 
+        sorted(petition_dfs.values(), key=lambda df: df['count'].max(), reverse=True),
+        Category20[(len(petition_dfs))]
+    ):
+        fig.line(df['timestamp'], df['count'] / 1000, line_width=2, color=colour, alpha=0.8,
+           muted_color=colour, muted_alpha=0.2, legend_label=df.title.iloc[0])
+        
+    fig.legend.click_policy = 'mute'
+    plt_script, plt_div = components(fig)
 
     pd.concat(list(petition_dfs.values())).to_csv('open_trans_petitions.csv', index=False)
 
@@ -85,5 +98,8 @@ if __name__ == '__main__':
     loader = jinja2.FileSystemLoader(searchpath="./")
     env = jinja2.Environment(loader=loader)
     template = env.get_template('trans_petitions_template.html')
-    with open('index.html', 'w') as index:
-        index.write(template.render(petitions=links, id_dump=id_dump, updated=updated))
+    with open('static/index.html', 'w') as index:
+        index.write(template.render(
+            petitions=links, id_dump=id_dump, updated=updated,
+            resources = CDN.render(), plt_script=plt_script, plt_div=plt_div
+        ))
