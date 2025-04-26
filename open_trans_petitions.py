@@ -79,7 +79,7 @@ if __name__ == '__main__':
     fig.legend.click_policy = 'mute'
     plt_script, plt_div = components(fig)
 
-    pd.concat(list(petition_dfs.values())).to_csv('open_trans_petitions.csv', index=False)
+    pd.concat(list(petition_dfs.values())).to_csv('static/open_trans_petitions.csv', index=False)
 
     titles = {k: df.title.iloc[0] for k, df in petition_dfs.items()}
     by_deadline = sorted(
