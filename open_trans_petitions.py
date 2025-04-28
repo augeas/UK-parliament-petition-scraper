@@ -3,6 +3,7 @@ from datetime import datetime
 import os
 import json
 import subprocess as sp
+import sys
 
 from bokeh.embed import components
 from bokeh.models import Legend
@@ -60,8 +61,9 @@ def get_and_save_petition(name, new=True):
     new_df.sort_values('timestamp').to_csv(fname, index=False)
     return new_df
 
-if __name__ == '__main__':    
-    petition_dfs = {k: get_and_save_petition(k) for k in PETITIONS.keys()}
+if __name__ == '__main__':
+    do_scrape = not sys.argv[-1] == 'dontscrape'
+    petition_dfs = {k: get_and_save_petition(k, new=do_scrape) for k in PETITIONS.keys()}
 
     fig = figure(width=600, height=700, x_axis_type="datetime")
     fig.title.text = 'Open Parliamentary Petitions on Trans Issues'

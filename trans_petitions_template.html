@@ -22,12 +22,17 @@
             function get_sigs(id) {
                 $.ajax(
                 "https://petition.parliament.uk/petitions/"+id+".json",
-                {"success": set_sigs}
+                {success: set_sigs, cache: false}
                 );
             }
             
-            $(function() {
+            function update_signatures() {
                 petition_ids.map(get_sigs); Sortable.init();
+            }
+            
+            $(function() {
+                update_signatures();
+                setInterval(update_signatures, 300000);
             });
         </script>
         {{ resources|safe }}
@@ -55,7 +60,7 @@
             @media only screen and (max-device-width: 640px) {
                 .container {
                     display: flex-box;
-                    flex-direction: column-reverse;
+                    flex-direction: column;
                 } 
                 .data {
                     margin: 10px; 
@@ -87,8 +92,8 @@
                 TheTransLegalProject</a>. See also the <a href="https://transsafety.network/">Trans Safety Network</a>
                 and the <a href="https://tacc.org.uk/">Trans Advocacy and Complaint Collective</a>.
                 Thanks to <a href="https://whatthetrans.com/compilation-of-petitions-for-trans-rights/">WhatTheTrans?!</a>
-                for linking to this page. Members of the trans community are invited to give feedback on
-                <a href="https://github.com/augeas/UK-parliament-petition-scraper/blob/master/trans_petitions_template.html">this page</a>.
+                for linking to this page. Members of the trans community are invited to give
+                <a href="https://github.com/augeas/UK-parliament-petition-scraper/blob/master/trans_petitions_template.html">feedback</a>.
                 </p>
                 
                 <table class="sortable-theme-slick" data-sortable>
