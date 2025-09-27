@@ -61,17 +61,8 @@ class PetitionSpider(scrapy.Spider):
         yield {
             'timestamp': response.meta.get(
                 'timestamp', datetime.now()).isoformat().split('.')[0],
-<<<<<<< HEAD
             'count': int(response.css('label.signature-count-progress>progress').xpath(
                 '@value').extract_first())
-=======
-            'count': int(response.css('span.count').xpath(
-                '@data-count').extract_first()),
-            'title': response.css('h1>span.heading-secondary').xpath(
-                'following-sibling::text()').extract_first().strip(),
-            'deadline': parser.parse(''.join(response.css('li.meta-deadline').xpath(
-                'child::text()').extract())).isoformat()
->>>>>>> ac02401b031ef14916bee743a46200b35f866a69
         }
             
 
