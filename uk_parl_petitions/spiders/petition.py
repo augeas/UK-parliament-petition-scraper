@@ -61,8 +61,8 @@ class PetitionSpider(scrapy.Spider):
         yield {
             'timestamp': response.meta.get(
                 'timestamp', datetime.now()).isoformat().split('.')[0],
-            'count': int(response.css('span.count').xpath(
-                '@data-count').extract_first())
+            'count': int(response.css('label.signature-count-progress>progress').xpath(
+                '@value').extract_first())
         }
             
 
